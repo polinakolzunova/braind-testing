@@ -8,7 +8,6 @@ $articleLink = "https://some-site.com/article/123456789";
 
 // формирование анонса
 $articlePreview = get_preview($articleText, $articleLink);
-$articlePreview = htmlspecialchars_decode($articlePreview);
 
 /**
  * Генерация анонса статьи со ссылкой на источник
@@ -50,7 +49,7 @@ function get_preview($articleText, $articleLink)
     // собираем анонс
     $preview = substr($preview, 0, $letter_i) . $link;
 
-    return $preview;
+    return htmlspecialchars_decode($preview);
 }
 
 /**
