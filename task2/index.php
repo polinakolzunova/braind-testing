@@ -1,10 +1,23 @@
 <?php
 
-$products = [
-    ['id' => 1, 'title' => 'Product 1', 'size' => 'маленький', 'color' => 'зелёный', 'new' => 0, 'category' => 'category 1', 'price' => '200'],
-    ['id' => 1, 'title' => 'Product 1', 'size' => 'маленький', 'color' => 'зелёный', 'new' => 0, 'category' => 'category 1', 'price' => '200'],
-    ['id' => 1, 'title' => 'Product 1', 'size' => 'маленький', 'color' => 'зелёный', 'new' => 0, 'category' => 'category 1', 'price' => '200'],
-];
+try {
+    $message = "";
+    $config = json_decode(file_get_contents("config.json"), true);
+    $mysqli = new Mysqli(
+        $config['host'],
+        $config['username'],
+        $config['password'],
+        $config['dbname']
+    );
+    $query = file_get_contents("task2.sql");
+    $result = $mysqli->query($query);
+    if ( !$result->num_rows > 0) {
+        $message = "Не найдено ни одной записи";
+    }
+
+} catch (Exception $exept) {
+    echo 'Выброшено исключение: ', $exept->getMessage(), "\n";
+}
 
 ?>
 
@@ -18,44 +31,65 @@ $products = [
             margin: 0;
             padding: 0;
         }
+
         .container {
             max-width: 700px;
             margin: 20px auto;
             padding: 10px 20px;
-            background-color: #eee;
+            background-color: #eeeeee;
             border-radius: 20px;
         }
+
+        h1 {
+            margin: 30px;
+            text-align: center;
+        }
+
         li {
             margin: 5px 0;
             padding: 10px 15px;
             background-color: #d4d4d4;
             border-radius: 10px;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
         }
-        h1 {
-            margin: 30px;
-            text-align: center;
+
+        li.head {
+            background-color: #555555;
+            color: #d4d4d4;
         }
-        span {
+
+        li span {
+            padding: 0 7px;
             display: inline-block;
+        }
+
+        li span:nth-of-type(2) {
+            flex-grow: 1;
         }
     </style>
 </head>
 <body>
 <div class="container">
     <h1>Товары: новинки зелёного цвета</h1>
+    <?php if ($message): ?>
+        <p><?= $message; ?></p>
+    <?php endif; ?>
     <ul>
-        <?php foreach ($products as $product): ?>
+        <li class="head">
+            <span>ID</span>
+            <span>TITLE</span>
+            <span>SIZE</span>
+            <span>COLOR</span>
+        </li>
+        <?php while ($product = $result->fetch_assoc()): ?>
             <li>
-                <span><?=$product['title'];?></span>
-                <span><?=$product['size'];?></span>
-                <span><?=$product['new'];?></span>
-                <span><?=$product['color'];?></span>
-                <span><?=$product['category'];?></span>
-                <span><?=$product['price'];?></span>
+                <span><?= $product['id']; ?></span>
+                <span><?= $product['title']; ?></span>
+                <span><?= $product['size']; ?></span>
+                <span><?= $product['color']; ?></span>
             </li>
-        <?php endforeach; ?>
+        <?php endwhile; ?>
     </ul>
 </div>
 </body>
