@@ -1,17 +1,36 @@
 <?php
 
+define("COUNT_ON_PAGE", 3);
+
 try {
     $message = "";
-    $config = json_decode(file_get_contents("config.json"), true);
+
+    // подключение к бд
+    $config = json_decode(file_get_contents("assets/data/config.json"), true);
     $mysqli = new Mysqli(
         $config['host'],
         $config['username'],
         $config['password'],
         $config['dbname']
     );
-    $query = file_get_contents("task2.sql");
+
+    // пагинация
+    // общее количество строк
+    $query = file_get_contents("assets/data/query_count.sql");
     $result = $mysqli->query($query);
-    if ( !$result->num_rows > 0) {
+    $row_count = $result->fetch_row()[0];
+
+    if ($row_count > 0) {
+        // номер текущей страницы
+        $page = ($_GET['page']) ? $_GET['page'] : 1;
+        // позиция первой записи
+        $start = ($page - 1) * COUNT_ON_PAGE;
+        // количество страниц
+        $page_count = ceil($row_count / COUNT_ON_PAGE);
+        // формирование запроса
+        $query = file_get_contents("assets/data/query_rows.sql") . " LIMIT $start, " . COUNT_ON_PAGE;
+        $result = $mysqli->query($query);
+    } else {
         $message = "Не найдено ни одной записи";
     }
 
@@ -26,48 +45,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <title>Task 2</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 700px;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: #eeeeee;
-            border-radius: 20px;
-        }
-
-        h1 {
-            margin: 30px;
-            text-align: center;
-        }
-
-        li {
-            margin: 5px 0;
-            padding: 10px 15px;
-            background-color: #d4d4d4;
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        li.head {
-            background-color: #555555;
-            color: #d4d4d4;
-        }
-
-        li span {
-            padding: 0 7px;
-            display: inline-block;
-        }
-
-        li span:nth-of-type(2) {
-            flex-grow: 1;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 <div class="container">
@@ -78,9 +56,9 @@ try {
     <ul>
         <li class="head">
             <span>ID</span>
-            <span>TITLE</span>
-            <span>SIZE</span>
-            <span>COLOR</span>
+            <span>НАЗВАНИЕ</span>
+            <span>РАЗМЕР</span>
+            <span>ЦВЕТ</span>
         </li>
         <?php while ($product = $result->fetch_assoc()): ?>
             <li>
@@ -91,6 +69,11 @@ try {
             </li>
         <?php endwhile; ?>
     </ul>
+    <div class="pagination">
+        <?php for ($i = 1; $i <= $page_count; $i++): ?>
+            <a <?= ($i == $page) ? "class='active'" : ""; ?> href="index.php?page=<?= $i; ?>"><?= $i; ?></a>
+        <?php endfor; ?>
+    </div>
 </div>
 </body>
 </html>
