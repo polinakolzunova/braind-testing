@@ -8,6 +8,7 @@ $articleLink = "https://some-site.com/article/123456789";
 
 // формирование анонса
 $articlePreview = get_preview($articleText, $articleLink);
+$articlePreview = htmlspecialchars_decode($articlePreview);
 
 /**
  * Генерация анонса статьи со ссылкой на источник
@@ -20,6 +21,8 @@ function get_preview($articleText, $articleLink)
 {
     // обрезка статьи, инициализация переменных
     $preview = trim(substr($articleText, 0, LETTER_COUNT));
+    $preview = strip_tags($preview);
+    $preview = htmlspecialchars($preview);
     $letter_i = strlen($preview);
     $word_count = 0;
 
@@ -58,7 +61,7 @@ function get_preview($articleText, $articleLink)
  */
 function is_in_word($char)
 {
-    return !($char == " ");
+    return !(ord($char) == ord(" ") || ord($char) == ord("&nbsp;"));
 }
 
 /**
@@ -89,7 +92,6 @@ function is_letter($char)
             background-color: #eee;
             border-radius: 20px;
         }
-
         h2 {
             text-align: center;
         }
