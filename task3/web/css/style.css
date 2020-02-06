@@ -1,0 +1,10 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background:
+            linear-gradient(180deg, #97ffb7 0, #97ffb7 40%, transparent 100%),
+            repeating-linear-gradient(-45deg, transparent, transparent 25px, #e2edc1 25px, #e2edc1 50px);
+}
