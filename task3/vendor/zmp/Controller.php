@@ -8,6 +8,9 @@
 
 namespace zmp;
 
+/**
+ * реализация контроллера
+ */
 class Controller
 {
     /**

@@ -8,6 +8,10 @@
 use zmp\Loader;
 use zmp\Router;
 
+/**
+ * Этот общий класс был создан ради
+ * хранения конфигурации и глобального доступа к ней
+ */
 class App
 {
     static $config;

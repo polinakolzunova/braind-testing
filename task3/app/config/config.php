@@ -12,12 +12,19 @@
  */
 
 return $config = [
+    /**
+     * данные для подключения к бд
+     */
     'db' => [
         'host' => 'localhost',
         'dbname' => 'task3_city',
         'username' => 'root',
         'password' => '',
     ],
+
+    /**
+     * маршруты приложения
+     */
     'routing' => [
         '/' => ['Main', 'index'],
         '/create' => ['Main', 'create'],

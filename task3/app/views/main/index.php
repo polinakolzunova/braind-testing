@@ -16,6 +16,7 @@
         <h1 class="display-3">Задание 3</h1>
         <h3>Просмотр и добавление городов в таблицу</h3>
     </header>
+
     <!-- флеш-сообшение об ошибке -->
     <?php if(isset($_SESSION['flesh-error'])): ?>
         <div class="alert alert-danger" role="alert">
@@ -23,6 +24,7 @@
         </div>
         <?php unset($_SESSION['flesh-error']); ?>
     <?php endif; ?>
+
     <!-- флеш-сообшение об успехе -->
     <?php if(isset($_SESSION['flesh-success'])): ?>
         <div class="alert alert-success" role="alert">
@@ -30,6 +32,7 @@
         </div>
         <?php unset($_SESSION['flesh-success']); ?>
     <?php endif; ?>
+
     <form method="post" action="create">
         <div class="form-row align-items-stretch">
             <div class="col-10">
