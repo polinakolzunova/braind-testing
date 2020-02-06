@@ -6,7 +6,10 @@
  * Time: 10:36
  */
 
-require '../vendor/zmp/Loader.php';
+define("SITE_DIR", $_SERVER['DOCUMENT_ROOT'] . '/');
+define("PROJECT_NAME", 'task3');
+
+require SITE_DIR . PROJECT_NAME . '/vendor/zmp/Loader.php';
 $loader = new zmp\Loader();
 spl_autoload_register([$loader, 'loadClass']);
 

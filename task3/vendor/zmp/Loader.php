@@ -8,9 +8,6 @@
 
 namespace zmp;
 
-define("SITE_DIR", $_SERVER['DOCUMENT_ROOT'] . '/');
-define("PROJECT_NAME", 'task3');
-
 /**
  * Class Loader
  * Автозагрузчик классов
