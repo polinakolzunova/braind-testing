@@ -8,14 +8,18 @@
 
 namespace app\controllers;
 
+use \App;
 use zmp\Controller;
+use zmp\DB;
+
 
 class MainController extends Controller
 {
 
     public function index()
     {
-        $this->render('index', ['a' => 1, 'b' => 2]);
+        $result = (DB::getConnection())->query('SELECT * FROM city');
+        $this->render('index', ['model' => $result]);
     }
 
     public function test()
