@@ -44,4 +44,12 @@ class Controller
     {
         header('Location: ' . SITE_URL . $path);
     }
+
+    /**
+     * перенаправление на домашнюю страницу
+     */
+    public function gohome()
+    {
+        $this->redirect("/");
+    }
 }

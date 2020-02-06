@@ -20,6 +20,8 @@ class App
 
         App::$config = require_once PROJECT_PATH . '/app/config/config.php';
 
+        session_start();
+
         $router = new Router();
         $router->start();
 
