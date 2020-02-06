@@ -1,7 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: PolinaKolzunova
- * Date: 06.02.2020
- * Time: 10:44
- */
+<h1>main index view</h1>
+<p><?=$a;?></p>
+<p><?=$b;?></p>

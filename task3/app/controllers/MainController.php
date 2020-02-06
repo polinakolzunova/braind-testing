@@ -8,16 +8,18 @@
 
 namespace app\controllers;
 
-class MainController
+use zmp\Controller;
+
+class MainController extends Controller
 {
 
     public function index()
     {
-        echo 'main index';
+        $this->render('index', ['a' => 1, 'b' => 2]);
     }
 
     public function test()
     {
-        echo 'main test';
+        $this->render('test');
     }
 }

@@ -6,7 +6,27 @@
  * Time: 10:47
  */
 
+namespace zmp;
+
+/**
+ * Представление
+ * Отрисовывает страницу (без layout)
+ * @package zmp
+ */
 class View
 {
 
+    public function render($controller, $view, $attr)
+    {
+        $view_file = SITE_DIR . PROJECT_NAME . '/app/views/' . $controller . '/' . $view . '.php';
+        if ($attr !== null) {
+            extract($attr);
+            $attr = null;
+        }
+
+        if (is_file($view_file)) {
+            require_once $view_file;
+            die;
+        }
+    }
 }
