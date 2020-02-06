@@ -19,7 +19,7 @@ class DB
     /**
      * @var object
      */
-    private $mysqli;
+    public $mysqli;
 
     /**
      * @throws \Exception
@@ -79,14 +79,16 @@ class DB
     private function prepareQuery($sql, $params, $get_insert_id = false)
     {
         $stmt = $this->mysqli->stmt_init();
+
         if (
             (($stmt->prepare($sql)) === false) ||
             (call_user_func_array([$stmt, 'bind_param'], self::refValues($params)) === false) ||
             ($stmt->execute() === false) ||
-            (($result = $stmt->get_result()) === false)
+            ($result = $stmt->get_result()) === false && ($result = $stmt->insert_id) === false
         ) {
             return false;
         }
+
         if ($get_insert_id) {
             if (($result = $stmt->insert_id) === false) {
                 return false;
