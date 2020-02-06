@@ -6,7 +6,18 @@
  * Time: 10:42
  */
 
+namespace app\controllers;
+
 class MainController
 {
 
+    public function index()
+    {
+        echo 'main index';
+    }
+
+    public function test()
+    {
+        echo 'main test';
+    }
 }

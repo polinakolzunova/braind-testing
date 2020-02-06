@@ -9,3 +9,6 @@
 require '../vendor/zmp/Loader.php';
 $loader = new zmp\Loader();
 spl_autoload_register([$loader, 'loadClass']);
+
+$router = new zmp\Router();
+$router->start();
