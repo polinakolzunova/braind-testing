@@ -22,8 +22,9 @@ class MainController extends Controller
         $this->render('index', ['model' => $result]);
     }
 
-    public function test()
+    public function create()
     {
+        App::array_debug($_POST);
         $this->render('test');
     }
 }

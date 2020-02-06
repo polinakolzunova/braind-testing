@@ -20,6 +20,6 @@ return $config = [
     ],
     'routing' => [
         '/' => ['Main', 'index'],
-        '/test' => ['Main', 'test'],
+        '/create' => ['Main', 'create'],
     ],
 ];

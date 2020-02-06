@@ -1,10 +1,26 @@
-* {
-    box-sizing: border-box;
+body {
+    background-color: #ffffff;
+    background-image:
+            repeating-linear-gradient(45deg,
+            rgba(255, 118, 116, 0.2), rgba(255, 118, 116, 0.2) 25px,
+            rgba(255, 205, 113, 0.2) 25px, rgba(255, 205, 113, 0.2) 50px,
+            rgba(253, 255, 117, 0.2) 50px, rgba(253, 255, 117, 0.2) 75px,
+            rgba(119, 233, 108, 0.2) 75px, rgba(119, 233, 108, 0.2) 100px,
+            rgba(127, 255, 252, 0.2) 100px, rgba(127, 255, 252, 0.2) 125px,
+            rgba(134, 136, 255, 0.2) 125px, rgba(134, 136, 255, 0.2) 150px,
+            rgba(224, 129, 255, 0.2) 150px, rgba(224, 129, 255, 0.2) 175px);
 }
 
-body {
-    min-height: 100vh;
-    background:
-            linear-gradient(180deg, #97ffb7 0, #97ffb7 40%, transparent 100%),
-            repeating-linear-gradient(-45deg, transparent, transparent 25px, #e2edc1 25px, #e2edc1 50px);
+#app table {
+    width: 450px;
+    margin: 0 auto 30px auto;
+}
+
+#app header {
+    margin: 30px 0;
+}
+
+#app form {
+    margin: 0 auto 30px auto;
+    max-width: 600px;
 }
