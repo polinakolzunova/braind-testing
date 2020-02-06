@@ -8,22 +8,19 @@
 
 namespace zmp;
 
+use \App;
+
 class Router
 {
-
-    private $routing = [
-        '/' => ['Main', 'index'],
-        '/test' => ['Main', 'test'],
-    ];
 
     public function start()
     {
         $route = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
         $route = str_replace('/' . PROJECT_NAME, '', $route);
 
-        if (isset($this->routing[$route])) {
-            $controller = 'app\\controllers\\' . $this->routing[$route][0] . 'Controller';
-            $action = $this->routing[$route][1];
+        if (isset(App::$config['routing'][$route])) {
+            $controller = 'app\\controllers\\' . App::$config['routing'][$route][0] . 'Controller';
+            $action = App::$config['routing'][$route][1];
             $controller_obj = new $controller();
             $controller_obj->$action();
         } else {

@@ -6,18 +6,15 @@
  * Time: 10:36
  */
 
+// корневая директория сайта
 define("SITE_DIR", $_SERVER['DOCUMENT_ROOT'] . '/');
+// название папки проекта
 define("PROJECT_NAME", 'task3');
-define("SITE_URL", $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/task3');
+// корневая директория прокта
+define("PROJECT_PATH", SITE_DIR . PROJECT_NAME);
+// url адрес сайта
+define("SITE_URL", $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/' . PROJECT_NAME);
 
-/*echo '<pre>';
-print_r($_SERVER);
-echo '</pre>';
-exit;*/
-
-require SITE_DIR . PROJECT_NAME . '/vendor/zmp/Loader.php';
-$loader = new zmp\Loader();
-spl_autoload_register([$loader, 'loadClass']);
-
-$router = new zmp\Router();
-$router->start();
+// запуск приложения
+require PROJECT_PATH . '/vendor/zmp/App.php';
+App::start();
